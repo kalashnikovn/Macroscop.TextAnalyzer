@@ -33,7 +33,7 @@ namespace Macroscop.TextAnalyzer.Api
                     Version = "v1"
                 });
             });
-            services.Configure<ConcurrencyLimitOptions>(Configuration.GetSection("TextAnalyzerOptions"));
+            services.Configure<ConcurrencyLimitOptions>(Configuration.GetSection("ConcurrencyLimitOptions"));
             services.AddScoped<ITextAnalyzeService, TextAnalyzeService>();
 
         }
