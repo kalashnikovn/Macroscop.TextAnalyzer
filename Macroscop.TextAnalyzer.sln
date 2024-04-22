@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7A39608A-000
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macroscop.TextAnalyzer.Api", "src\Macroscop.TextAnalyzer.Api\Macroscop.TextAnalyzer.Api.csproj", "{D39A7364-F2E4-4CF9-9998-921AB5722306}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macroscop.TextAnalyzer.ClientApp", "src\Macroscop.TextAnalyzer.ClientApp\Macroscop.TextAnalyzer.ClientApp.csproj", "{0E33BFEB-3F3B-4857-8194-B1BC3E5EA96C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +22,13 @@ Global
 		{D39A7364-F2E4-4CF9-9998-921AB5722306}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D39A7364-F2E4-4CF9-9998-921AB5722306}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D39A7364-F2E4-4CF9-9998-921AB5722306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E33BFEB-3F3B-4857-8194-B1BC3E5EA96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E33BFEB-3F3B-4857-8194-B1BC3E5EA96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E33BFEB-3F3B-4857-8194-B1BC3E5EA96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E33BFEB-3F3B-4857-8194-B1BC3E5EA96C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D39A7364-F2E4-4CF9-9998-921AB5722306} = {7A39608A-000C-4619-8ED9-D2D3DA931F6B}
+		{0E33BFEB-3F3B-4857-8194-B1BC3E5EA96C} = {7A39608A-000C-4619-8ED9-D2D3DA931F6B}
 	EndGlobalSection
 EndGlobal

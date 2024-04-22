@@ -1,3 +1,5 @@
+using Macroscop.TextAnalyzer.Api.Bll.Services;
+using Macroscop.TextAnalyzer.Api.Bll.Services.Interfaces;
 using Macroscop.TextAnalyzer.Api.Middlewares;
 using Macroscop.TextAnalyzer.Api.Options;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +34,7 @@ namespace Macroscop.TextAnalyzer.Api
                 });
             });
             services.Configure<ConcurrencyLimitOptions>(Configuration.GetSection("TextAnalyzerOptions"));
+            services.AddScoped<ITextAnalyzeService, TextAnalyzeService>();
 
         }
 
