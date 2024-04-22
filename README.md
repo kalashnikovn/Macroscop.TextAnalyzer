@@ -1,0 +1,1 @@
+# Macroscop.TextAnalyzer
