@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Macroscop.TextAnalyzer.Api.Middlewares;
+using Macroscop.TextAnalyzer.Api.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+
+
 
 namespace Macroscop.TextAnalyzer.Api
 {
@@ -34,6 +31,8 @@ namespace Macroscop.TextAnalyzer.Api
                     Version = "v1"
                 });
             });
+            services.Configure<ConcurrencyLimitOptions>(Configuration.GetSection("TextAnalyzerOptions"));
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -48,6 +47,8 @@ namespace Macroscop.TextAnalyzer.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseMiddleware<ConcurrencyLimiterMiddleware>();
             
             app.UseEndpoints(endpoints =>
             {
