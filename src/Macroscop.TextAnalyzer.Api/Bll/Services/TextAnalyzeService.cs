@@ -7,7 +7,7 @@ namespace Macroscop.TextAnalyzer.Api.Bll.Services
     {
         public bool CheckPalindrome(string src)
         {
-            string cleanString = new string(
+            var cleanString = new string(
                     src.Where(c => !char.IsPunctuation(c) && !char.IsWhiteSpace(c))
                     .ToArray())
                 .ToLower();
