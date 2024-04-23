@@ -1,5 +1,6 @@
 ﻿namespace Macroscop.TextAnalyzer.ClientApp.Models
 {
     public record PalindromeRequestModel(
-        string Text);
+        string Text,
+        string FileName);
 }

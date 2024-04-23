@@ -8,10 +8,21 @@ namespace Macroscop.TextAnalyzer.ClientApp
 {
     public sealed class TextReader : IDataReader
     {
-        public Task ReadData(string folderName, Channel<PalindromeRequestModel> outputChannel)
+        public async Task ReadData(string folderPath, Channel<PalindromeRequestModel> outputChannel)
         {
+            var files = Directory.GetFiles(folderPath);
             
-            throw new System.NotImplementedException();
+            foreach (var filePath in files)
+            {
+                await using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                using var streamReader = new StreamReader(fileStream);
+                
+                var fileContent = await streamReader.ReadToEndAsync();
+                
+                await outputChannel.Writer.WriteAsync(new PalindromeRequestModel(fileContent, filePath));
+            }
+            
+            outputChannel.Writer.Complete();
         }
     }
 }
