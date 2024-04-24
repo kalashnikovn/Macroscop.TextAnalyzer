@@ -10,7 +10,7 @@ namespace Macroscop.TextAnalyzer.Api.Middlewares
     {
         private readonly IOptionsMonitor<ConcurrencyLimitOptions> _optionsMonitor;
         private readonly RequestDelegate _next;
-        private static SemaphoreSlim _semaphore = new SemaphoreSlim(1);
+        private static SemaphoreSlim _semaphore;
         
         public ConcurrencyLimiterMiddleware(RequestDelegate next, IOptionsMonitor<ConcurrencyLimitOptions> optionsMonitor)
         {

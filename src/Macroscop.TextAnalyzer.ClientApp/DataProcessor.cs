@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Json;
+using System.Text;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -28,9 +28,10 @@ namespace Macroscop.TextAnalyzer.ClientApp
             await foreach(var requestModel in inputChannel.Reader.ReadAllAsync(cancellationToken))
             {
                 cancellationToken.ThrowIfCancellationRequested();
+
+                var content = new StringContent(requestModel.Text, Encoding.UTF8, "text/plain");
                 
-                var response = await client.PostAsJsonAsync("palindrome", requestModel, cancellationToken);
-                
+                var response = await client.PostAsync("palindrome", content, cancellationToken);
                 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -41,8 +42,8 @@ namespace Macroscop.TextAnalyzer.ClientApp
                     continue;
                 }
                 
-                var result = await response.Content.ReadFromJsonAsync<PalindromeResponseModel>();
-                var responseInfo = result.Result ? "Строка является палиндромом" : "Строка не является палиндромом";
+                var result = await response.Content.ReadAsStringAsync(cancellationToken);
+                var responseInfo = bool.Parse(result) ? "Строка является палиндромом" : "Строка не является палиндромом";
                 
                 PrintResponse(requestModel.FileName,
                     requestModel.Text,

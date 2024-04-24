@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Macroscop.TextAnalyzer.Api.Bll.Services.Interfaces;
-using Macroscop.TextAnalyzer.Api.Requests.V1;
-using Macroscop.TextAnalyzer.Api.Responses.V1;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Macroscop.TextAnalyzer.Api.Controllers.V1
@@ -19,12 +17,11 @@ namespace Macroscop.TextAnalyzer.Api.Controllers.V1
         }
         
         [HttpPost("palindrome")]
-        public async Task<PalindromeResponse> Palindrome(PalindromeRequest request)
+        public async Task<bool> Palindrome([FromBody] string text)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
-            var result = _textAnalyzeService.CheckPalindrome(request.Text);
-            return new PalindromeResponse(result);
+            return _textAnalyzeService.CheckPalindrome(text);
         }
     }
 }

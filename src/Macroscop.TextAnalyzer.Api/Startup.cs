@@ -1,5 +1,6 @@
 using Macroscop.TextAnalyzer.Api.Bll.Services;
 using Macroscop.TextAnalyzer.Api.Bll.Services.Interfaces;
+using Macroscop.TextAnalyzer.Api.Formatters;
 using Macroscop.TextAnalyzer.Api.Middlewares;
 using Macroscop.TextAnalyzer.Api.Options;
 using Microsoft.AspNetCore.Builder;
@@ -24,17 +25,21 @@ namespace Macroscop.TextAnalyzer.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
+            services
+                .AddControllers(options => options.InputFormatters.Add(new PlainTextFormatter()))
+                .Services
+                .AddSwaggerGen(c =>
                 {
-                    Title = "Macroscop.TextAnalyzer.Api",
-                    Version = "v1"
-                });
-            });
-            services.Configure<ConcurrencyLimitOptions>(Configuration.GetSection("ConcurrencyLimitOptions"));
-            services.AddScoped<ITextAnalyzeService, TextAnalyzeService>();
+                    c.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Title = "Macroscop.TextAnalyzer.Api",
+                        Version = "v1"
+                    });
+                })
+                .Configure<ConcurrencyLimitOptions>(Configuration.GetSection("ConcurrencyLimitOptions"))
+                .AddScoped<ITextAnalyzeService, TextAnalyzeService>();
+
+
 
         }
 
